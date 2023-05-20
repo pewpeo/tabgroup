@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tab Group</title>
+<link rel="icon" href="data:,"> <!-- fake favicon -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="container-sm mt-5">
+<h1 id="heading">Tab Group Page</script></h1>
+<p>Set the title of the page:</p>
+<form id="title-form" action="submit">
+    <div class="input-group mb-3">
+        <button class="btn btn-outline-secondary" type="submit" id="button-set-title">Set Title</button>
+        <input id="input-title" type="text" class="form-control" placeholder="Tab Group" aria-label="Tab Group" aria-describedby="button-set-title">
+    </div>
+</form>
+</div>
+
+<script>
+    const form = document.getElementById("title-form");
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const inputElem = document.getElementById("input-title");
+        const text = inputElem.value.trim();
+        if (text.length > 0) {
+            document.title = text
+            window.location.hash = `title=${text}`;
+        } else {
+            document.title = "Tab Group";
+            window.location.hash = '';
+        }
+    });
+
+    const matches = /title=([^&#=]*)/.exec(window.location.hash);
+    const title = matches && matches[1] ? matches[1] : undefined;
+    if (title) {
+        document.title = decodeURIComponent(title);
+        document.getElementById("input-title").value = document.title;
+    }
+</script>
+
+</body>
+</html>
