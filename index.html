@@ -25,9 +25,10 @@
 
 <script>
     const form = document.getElementById("form-title");
+    const inputElem = document.getElementById("input-title");
+
     form.addEventListener("submit", function (e) {
         e.preventDefault();
-        const inputElem = document.getElementById("input-title");
         const text = inputElem.value.trim();
         if (text.length > 0) {
             document.title = text
@@ -42,8 +43,10 @@
     const title = matches && matches[1] ? matches[1] : undefined;
     if (title) {
         document.title = decodeURIComponent(title);
-        document.getElementById("input-title").value = document.title;
+        inputElem.value = document.title;
     }
+    
+    inputElem.focus();
 </script>
 
 </body>
