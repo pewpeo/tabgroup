@@ -15,7 +15,7 @@
 <div class="container-sm mt-5">
 <h1 id="heading">Tab Group Page</script></h1>
 <p>Set the title of the page:</p>
-<form id="title-form" action="submit">
+<form id="form-title" action="submit">
     <div class="input-group mb-3">
         <button class="btn btn-outline-secondary" type="submit" id="button-set-title">Set Title</button>
         <input id="input-title" type="text" class="form-control" placeholder="Tab Group" aria-label="Tab Group" aria-describedby="button-set-title">
@@ -24,7 +24,7 @@
 </div>
 
 <script>
-    const form = document.getElementById("title-form");
+    const form = document.getElementById("form-title");
     form.addEventListener("submit", function (e) {
         e.preventDefault();
         const inputElem = document.getElementById("input-title");
