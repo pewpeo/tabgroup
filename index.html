@@ -24,6 +24,10 @@
 </div>
 
 <script>
+    //
+    // Set page title to input field text
+    //
+
     const form = document.getElementById("form-title");
     const inputElem = document.getElementById("input-title");
 
@@ -47,6 +51,24 @@
     }
     
     inputElem.focus();
+
+    //
+    // Automatically switch Dark/Light mode
+    //
+
+    // Set theme to the user's preferred color scheme
+    function updateTheme() {
+        const colorMode = window.matchMedia("(prefers-color-scheme: dark)").matches ?
+            "dark" :
+            "light";
+        document.querySelector("html").setAttribute("data-bs-theme", colorMode);
+    }
+
+    // Set theme on load
+    updateTheme()
+
+    // Update theme when the preferred scheme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme)
 </script>
 
 </body>
