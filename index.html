@@ -13,14 +13,29 @@
 <body>
 
 <div class="container-sm mt-5">
-<h1 id="heading">Tab Group Page</script></h1>
-<p>Set the title of the page:</p>
-<form id="form-title" action="submit">
-    <div class="input-group mb-3">
-        <button class="btn btn-outline-secondary" type="submit" id="button-set-title">Set Title</button>
-        <input id="input-title" type="text" class="form-control" placeholder="Tab Group" aria-label="Tab Group" aria-describedby="button-set-title">
+    <div class="d-flex align-items-center justify-content-between">
+        <h1 id="heading">Tab Group Page</script></h1>
+        
+        <div class="dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                &#9728;
+            </button>
+            <ul class="dropdown-menu">
+                <li><a id="color-mode-auto" class="dropdown-item">Auto</a></li>
+                <li><a id="color-mode-light" class="dropdown-item">Light</a></li>
+                <li><a id="color-mode-dark" class="dropdown-item">Dark</a></li>
+            </ul>
+        </div>
     </div>
-</form>
+
+    <p>Set the title of the page:</p>
+
+    <form id="form-title" action="submit">
+        <div class="input-group mb-3">
+            <button class="btn btn-outline-secondary" type="submit" id="button-set-title">Set Title</button>
+            <input id="input-title" type="text" class="form-control" placeholder="Tab Group" aria-label="Tab Group" aria-describedby="button-set-title">
+        </div>
+    </form>
 </div>
 
 <script>
@@ -56,11 +71,32 @@
     // Automatically switch Dark/Light mode
     //
 
+    function setColorMode(event) {
+        const id = event.target.id;
+
+        let theme = "auto";
+        if (id === 'color-mode-dark') {
+            theme = "dark";
+        } else if (id === 'color-mode-light') {
+            theme = "light";
+        }
+
+        localStorage.setItem('theme', theme);
+        updateTheme();
+    }
+
     // Set theme to the user's preferred color scheme
     function updateTheme() {
-        const colorMode = window.matchMedia("(prefers-color-scheme: dark)").matches ?
+        let colorMode = window.matchMedia("(prefers-color-scheme: dark)").matches ?
             "dark" :
             "light";
+
+        // check if there is a manually selected color mode
+        const storedColorMode = localStorage.getItem('theme');
+        if (storedColorMode && (storedColorMode === "light" ||  storedColorMode === 'dark')) {
+            colorMode = storedColorMode
+        }
+
         document.querySelector("html").setAttribute("data-bs-theme", colorMode);
     }
 
@@ -69,6 +105,11 @@
 
     // Update theme when the preferred scheme changes
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme)
+
+    // Add event listener to set color theme
+    document.getElementById('color-mode-auto').addEventListener('click', setColorMode);
+    document.getElementById('color-mode-light').addEventListener('click', setColorMode);
+    document.getElementById('color-mode-dark').addEventListener('click', setColorMode);
 </script>
 
 </body>
