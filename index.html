@@ -95,8 +95,8 @@
             "light";
 
         // check if there is a manually selected color mode
-        const storedColorMode = localStorage.getItem('theme');
-        if (storedColorMode && (storedColorMode === "light" ||  storedColorMode === 'dark')) {
+        const storedColorMode = localStorage.getItem('theme') ?? 'auto';
+        if (storedColorMode === "light" ||  storedColorMode === 'dark') {
             colorMode = storedColorMode
         }
 
